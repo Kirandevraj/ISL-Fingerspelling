@@ -37,12 +37,12 @@
 
         header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         h1 {
             font-size: 2.1em;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             font-weight: 600;
             color: #222;
             line-height: 1.3;
@@ -51,7 +51,7 @@
         .venue {
             font-size: 1.3em;
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         .authors {
@@ -64,11 +64,11 @@
             font-size: 1.25em;
             color: #666;
             line-height: 1.8;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .links {
-            margin-top: 30px;
+            margin-top: 20px;
             display: flex;
             gap: 20px;
             justify-content: center;
@@ -94,21 +94,21 @@
         }
 
         section {
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         h2 {
             font-size: 2.1em;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             color: #333;
             font-weight: 600;
             border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
 
         h3 {
             font-size: 1.45em;
-            margin: 30px 0 15px 0;
+            margin: 20px 0 10px 0;
             color: #444;
             font-weight: 600;
         }
@@ -120,14 +120,14 @@
         }
 
         .examples-section {
-            margin: 40px 0;
+            margin: 25px 0;
         }
 
         .examples-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-top: 30px;
+            gap: 25px;
+            margin-top: 20px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -228,15 +228,15 @@
         }
 
         code {
-            font-size: 1.05em;
+            font-size: 1.15em;
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 25px 20px;
             color: #666;
             border-top: 1px solid #e0e0e0;
-            margin-top: 60px;
+            margin-top: 30px;
         }
 
         @media (max-width: 768px) {
@@ -351,16 +351,28 @@
             <h2>Dataset Structure</h2>
             <div class="code-block">
                 <pre>ISL-Fingerspelling/
-├── videos/              # 1,308 MP4 video files
-├── annotations.csv      # Annotations with video IDs and text
+├── videos/                        # 1,308 MP4 video files
+├── fingerspelling_annotations.csv # Segment annotations
+├── localization_timestamps.csv    # Temporal localization in source videos
 └── README.md</pre>
             </div>
 
-            <h3>CSV Format</h3>
-            <p>The annotations.csv file contains:</p>
+            <h3>fingerspelling_annotations.csv</h3>
+            <p>Maps video segments to their transcriptions:</p>
             <ul>
-                <li><code>uid</code>: Unique identifier (format: {video_id}_seg{number})</li>
-                <li><code>text</code>: Ground truth fingerspelling text</li>
+                <li><code>uid</code>: Unique segment ID (format: {video_id}_seg{index}_signer)</li>
+                <li><code>text</code>: Fingerspelled text</li>
+            </ul>
+
+            <h3>localization_timestamps.csv</h3>
+            <p>Contains temporal boundaries of fingerspelling segments in the original YouTube videos:</p>
+            <ul>
+                <li><code>video_id</code>: YouTube video ID</li>
+                <li><code>segment_index</code>: Segment index within the video</li>
+                <li><code>start_time</code>, <code>start_sec</code>: Start timestamp and seconds</li>
+                <li><code>end_time</code>, <code>end_sec</code>: End timestamp and seconds</li>
+                <li><code>duration_str</code>, <code>duration_sec</code>: Duration in timestamp and seconds</li>
+                <li><code>transcript</code>: Fingerspelled text</li>
             </ul>
         </section>
 
@@ -380,13 +392,12 @@
         <section id="acknowledgments">
             <h2>Acknowledgments</h2>
             <p>
-                Data sourced from publicly available ISH News YouTube videos. 407 of 499 videos overlap with the iSign dataset (which obtained ISH News permission for research use). This dataset is released under CC BY-NC 4.0 license for research purposes only.
+                Data sourced from publicly available ISH News YouTube videos. 407 of 499 videos overlap with the iSign dataset. This dataset is released under CC BY-NC 4.0 license for research purposes only.
             </p>
         </section>
 
         <footer>
             <p><strong>Contact:</strong> kirandevraj.r@research.iiit.ac.in</p>
-            <p style="margin-top: 10px;">&copy; 2025 IIIT Hyderabad</p>
         </footer>
     </div>
 </body>
