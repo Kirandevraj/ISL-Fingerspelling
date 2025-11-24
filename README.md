@@ -7,73 +7,34 @@
 > **Continuous Fingerspelling Dataset for Indian Sign Language**
 > WSLP @ AACL-IJCNLP 2025
 
-**[Project Page](https://kirandevraj.github.io/ISL-Fingerspelling)** | **[Dataset (Hugging Face)](https://huggingface.co/datasets/kirandevraj/ISL-Fingerspelling)** | **[Paper (Coming Soon)](#)**
+**[Project Page](https://kirandevraj.github.io/ISL-Fingerspelling)** | **[Dataset (Hugging Face)](https://huggingface.co/datasets/kirandevraj/ISL-Fingerspelling)**
 
 ---
 
 ## Overview
 
-The first continuous fingerspelling dataset for Indian Sign Language (ISL), extracted from ISH News YouTube videos. The dataset comprises **1,308 segments** from **499 videos**, totaling **70.85 minutes** and **14,814 characters**, capturing authentic coarticulation patterns in naturalistic signing contexts.
+We introduce the continuous fingerspelling dataset for Indian Sign Language, comprising 1,308 video segments with aligned text annotations. The dataset captures authentic coarticulation patterns from professional signers, supporting research in fingerspelling recognition and sign language processing.
 
-### Key Features
+## Statistics
 
-- First continuous ISL fingerspelling dataset (previous datasets only provide static images)
-- 1,308 video segments with aligned text annotations
-- 3 professional signers from ISH News
-- 90.67% annotation accuracy validated by ISL interpreter
-- Baseline results: 82.91% CER with ByT5-small model
-
-### Statistics
-
-| Segments | Duration | Characters | Videos | Signers |
-|----------|----------|------------|--------|---------|
-| 1,308 | 70.85 min | 14,814 | 499 | 3 |
+| Segments | Duration | Characters | Videos | Signers | Validation Acc. |
+|----------|----------|------------|--------|---------|-----------------|
+| 1,308 | 70 min | 14,814 | 499 | 3 | 90.67% |
 
 ## Dataset Structure
 
 ```
 ISL-Fingerspelling/
 ├── videos/              # 1,308 MP4 video files
-├── train_ytsl25.csv     # Training split (1,104 segments)
-├── test_ytsl25.csv      # Test split (204 segments)
+├── annotations.csv      # Annotations with video IDs and text
 └── README.md
 ```
 
-## Quick Start
+### CSV Format
 
-### Download from Hugging Face
-
-```python
-from datasets import load_dataset
-
-# Load the dataset
-dataset = load_dataset("kirandevraj/ISL-Fingerspelling")
-
-# Access splits
-train_data = dataset['train']
-test_data = dataset['test']
-```
-
-### Clone Repository
-
-```bash
-git clone https://huggingface.co/datasets/kirandevraj/ISL-Fingerspelling
-```
-
-## Baseline Results
-
-| Model | Pre-training | Fine-tuning | Test CER (%) |
-|-------|-------------|-------------|--------------|
-| ByT5-small | iSign | None | 432.44 |
-| ByT5-small | iSign | ISL Fingerspelling | **82.91** |
-
-Fine-tuning on fingerspelling data achieves an 80.8% relative reduction in error rate, demonstrating the necessity of domain-specific adaptation.
-
-## Supported Tasks
-
-1. **Transcription**: Convert continuous fingerspelling videos into character sequences
-2. **Temporal Localization**: Identify fingerspelling boundaries in longer videos
-3. **Generation**: Produce signing videos from text with realistic handshapes
+The annotations.csv file contains:
+- `uid`: Unique identifier (format: {video_id}_seg{number})
+- `text`: Ground truth fingerspelling text
 
 ## Citation
 
@@ -96,10 +57,6 @@ Fine-tuning on fingerspelling data achieves an 80.8% relative reduction in error
 ## License
 
 This dataset is released under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) for research purposes only.
-
-## Acknowledgments
-
-Data sourced from publicly available ISH News YouTube videos. 407 of 499 videos overlap with the iSign dataset (which obtained ISH News permission for research use).
 
 ---
 
